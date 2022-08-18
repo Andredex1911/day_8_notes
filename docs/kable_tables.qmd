@@ -1,0 +1,33 @@
+---
+title: "Kable Tables"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(lterdatasampler)
+library(janitor)
+library(here)
+library(palmerpenguins)
+library(lubridate)
+library(kableExtra)
+```
+
+### Create a summary table of mean maple seedling height (cm\^2) and sd of maple seedling height grouped by watershed AND year
+
+```{r}
+hbr_summary <- hbr_maples %>%
+  group_by(watershed, year) %>%
+  summarize(mean_height = mean(stem_length, na.rm = TRUE),
+            sd_height = sd(stem_length, na.rm = TRUE))
+  
+```
+
+Make a nice table with it!
+
+```{r}
+hbr_summary %>%
+  kable()
+
+```
